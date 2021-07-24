@@ -1,0 +1,14 @@
+{
+    "name": "Mustang",
+    "makers": "Ford",
+    "variant": "GT 500",
+    "engine": {
+        "type": "5.0L Ti-VCT V8",
+        "maxPower": "395bhp@6500+-50rpm",
+        "maxtorque": "515Nm@4250+-50rpm"
+    },
+    "trim": [
+        "coupe",
+        "convertible"
+    ]
+}

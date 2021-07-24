@@ -1,0 +1,33 @@
+{
+  "name": "api-simulator",
+  "version": "1.0.0",
+  "description": "Mock API to simulate API responses",
+  "main": "index.js",
+  "scripts": {
+    "api": "ts-node-dev --respawn --pretty --transpile-only src/app/index.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/debdeep-das/api-simulator.git"
+  },
+  "keywords": [
+    "Mock",
+    "API"
+  ],
+  "author": "Debdeep Das",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/debdeep-das/api-simulator/issues"
+  },
+  "homepage": "https://github.com/debdeep-das/api-simulator#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http-status-codes": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/node": "^16.4.0",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}

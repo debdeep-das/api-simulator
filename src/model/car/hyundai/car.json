@@ -1,0 +1,14 @@
+{
+    "name": "Creta",
+    "makers": "Hyundai",
+    "variant": "SX Opt Turbo",
+    "engine": {
+        "type": "1.4L GDi Turbo Petrol",
+        "maxPower": "138.08bhp@6000rpm",
+        "maxtorque": "242nm@1500-3200rpm"
+    },
+    "trim": [
+        "Dual tone AT",
+        "7 seater"
+    ]
+}
