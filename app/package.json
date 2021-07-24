@@ -4,7 +4,7 @@
   "description": "Mock API to simulate API responses",
   "main": "index.js",
   "scripts": {
-    "api": "ts-node-dev --respawn --pretty --transpile-only src/app/index.ts"
+    "api": "ts-node-dev --respawn --pretty --transpile-only api/index.ts"
   },
   "repository": {
     "type": "git",
