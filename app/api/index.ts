@@ -8,43 +8,83 @@ const app: express.Application = express();
 app.set(config.response.header.mediaType.key, config.response.header.mediaType.value);
 app.use(express.json());
 
-const cars = new carController.CarController();
+let cars = new carController.CarController();
 
 app.get('/healthz', (req, res) => {
     res.status(StatusCodes.OK).send();
 });
 
-
 app.get('/environment', (req, res) => {
     res.status(StatusCodes.OK).send(config);
 });
 
-app.get('/car', (req, res) => {
-    return res.status(StatusCodes.OK).send(cars.getCars());
+app.post('/reset', (req, res) => {
+    cars = new carController.CarController();
+    res.status(StatusCodes.OK).send(cars.getCars());
 });
 
-app.get('/car/:name', (req, res) => {
-    let car = cars.getCar(req.params.name);
-
-    if (typeof car === 'undefined') {
-        return res.status(StatusCodes.NOT_FOUND).send();
-    } else {
-        return res.status(StatusCodes.OK).send(car);
+app.get('/car', (req, res) => {
+    try {
+        let response = cars.getCars();
+        if (response.length <= 0) {
+            res.status(StatusCodes.NOT_FOUND).send();
+        } else {
+            res.status(StatusCodes.OK).send(response);
+        }
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
     }
 
 });
 
+app.get('/car/:name', (req, res) => {
+
+    try {
+        let response = cars.getCar(req.params.name);
+        if (typeof response == 'undefined') {
+            res.status(StatusCodes.NOT_FOUND).send();
+        } else {
+            res.status(StatusCodes.OK).send(response);
+        }
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+
+
+});
+
 app.post('/car', (req, res) => {
-   
-    return res.status(StatusCodes.OK).send(cars.addCar(req.body));
+    try {
+        cars.addCar(req.body);
+        res.status(StatusCodes.OK).send();
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    }
 
 });
 
 app.put('/car', (req, res) => {
-    return res.status(StatusCodes.OK).send(cars.updateCar(req.body));
+    try {
+        cars.updateCar(req.body);
+        res.status(StatusCodes.OK).send();
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+
 });
 
-app.delete('/car', (req, res) => {
+app.delete('/car/:name', (req, res) => {
+    try {
+        let status = cars.removeCar(req.params.name);
+        if (status >= 0) {
+            res.status(StatusCodes.OK).send();
+        } else {
+            res.status(StatusCodes.NOT_FOUND).send();
+        }
+    } catch (error) {
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).send();
+    }
+
 
 });
 

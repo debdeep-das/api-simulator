@@ -1,3 +1,4 @@
+import { StatusCodes } from "http-status-codes";
 import hyundai from "../model/car/hyundai/car.json"
 import mustang from "../model/car/mustang/car.json"
 
@@ -19,18 +20,32 @@ class CarController {
         this.cars.push(mustang);
     }
 
+   
     /**
      * getCars: Gets list of cars 
      */
     public getCars() {
-        return this.cars;
+        try {
+            return this.cars
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+
     }
 
     /**
      * getCar : Gets details of a car by name
      */
     public getCar(name: String) {
-        return this.cars.find(c => c.name == name);
+        try {
+            return this.cars.find(c => c.name == name);            
+        } catch (error) {
+            console.error(error);
+           throw error;
+        }
+
+
     }
 
     /**
@@ -47,19 +62,45 @@ class CarController {
         },
         trim: Array<String>
     }) {
-        this.cars.push(car);
-        return this.cars;
+        try {
+            this.cars.push(car);         
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+
     }
 
     /**
      * updateCar
      */
-    public updateCar(details:{name: String, trim:String}) {
-        this.cars.find(c => c.name == details.name)?.trim.push(details.trim);
-        return this.getCar(details.name);
-        
-        
-        
+    public updateCar(details: { name: String, trim: String }) {
+        try {
+            this.cars.find(c => c.name == details.name)?.trim.push(details.trim);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+
+
+    }
+
+    /**
+     * removeCar
+     */
+    public removeCar(name: String) {
+        try {
+            let index = - 1;
+            index = this.cars.findIndex(c => c.name == name);
+            if ( index > -1){
+                this.cars.splice(index,1);
+            }
+           return index;
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+
     }
 
 }
