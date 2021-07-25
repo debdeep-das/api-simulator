@@ -1,6 +1,6 @@
 # api-simulator
 ## Version 1.0.0 ##
-Simple API simulator on NodeJS, that will allow you to mock response
+Simple API simulator, that will allow you to mock response
 
 
 There are 5 APIs
